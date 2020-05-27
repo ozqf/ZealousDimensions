@@ -147,16 +147,25 @@ void() army_rocket_think =
 {
 	// Only do a limited amount of updates to the missile
 	self.count = self.count + 1;
-	if (self.count < (5+skill)) {
+	// zqf - higher count threshold to track for longer
+	if (self.count < (2000+skill)) {
 		// Keep ticking (slowly)
 		self.nextthink = time + 0.1;
 		// If enemy active, track them down (slow turn)
-		if (self.enemy && self.count < 5) {
-			// Speed up and steer towards enemy
-			self.attack_speed = self.attack_speed + 100;
-			self.attack_track = normalize(self.enemy.origin - self.origin);
-			self.velocity = self.attack_track * self.attack_speed;
-			self.angles = vectoangles(self.velocity);
+		if (self.enemy && self.count < 20) {
+			// zqf - quoth style rocketeer missile
+			// speed up more aggressively and track more gradually.
+			self.attack_speed = self.attack_speed + 200;
+			local vector forward;
+			local vector turn_push;
+			local float turn_strength = 0.7;
+
+			forward = normalize(self.velocity);
+			
+			turn_push = normalize(self.enemy.origin - self.origin);
+			turn_push = turn_push * turn_strength;
+			forward = normalize(forward + turn_push);
+			self.velocity = forward * self.attack_speed;
 		}
 		// Fire at original location
 		else self.velocity = self.velocity * 1.15;
@@ -240,7 +249,7 @@ void()	army_plasma_atk3 =[	$shoot3, army_plasma_atk4	] {ai_face();};
 void()	army_plasma_atk4 =[	$shoot4, army_plasma_atk5	] {ai_face();};
 void()	army_plasma_atk5 =[	$shoot5, army_plasma_atk6	] {ai_face();army_plasma_fire();};
 void()	army_plasma_atk6 =[	$shoot6, army_plasma_atk7	] {};
-void()	army_plasma_atk7 =[	$shoot7, army_plasma_atk8	] {ai_face();SUB_CheckRefire (army_plasma_atk1);};
+void()	army_plasma_atk7 =[	$shoot7, army_plasma_atk8	] {ai_face();SUB_CheckRefireRepeater (army_plasma_atk1);};
 void()	army_plasma_atk8 =[	$shoot8, army_plasma_atk9	] {};
 void()	army_plasma_atk9 =[	$shoot9, army_run1	] {ai_face();};
 

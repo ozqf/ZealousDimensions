@@ -551,6 +551,14 @@ void (void() thinkst) SUB_CheckRefire =
 	self.think = thinkst;
 };
 
+// zqf additional - attack with no break
+// (eg Doom chaingunner)
+void (void() thinkst) SUB_CheckRefireRepeater =
+{
+	if (!visible (self.enemy)) return;
+	self.think = thinkst;
+};
+
 //----------------------------------------------------------------------
 // Not used anywhere in QC
 //----------------------------------------------------------------------

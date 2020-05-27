@@ -512,7 +512,8 @@ void(float gib_no, float gib_qty) ThrowGib =
 		
 			//----------------------------------------------------------------------
 			// NEW Directional gib velocity with modifier
-			gibitem.velocity = DirectionForDamage(self.health);
+			local float gib_mul = 3; // zqf - amp up explosion energy
+			gibitem.velocity = DirectionForDamage(self.health) * gib_mul;
 			gibitem.angles_y = gibitem.ideal_yaw = random() * 360;
 			if (gib_no < 10) gibitem.avelocity = vecrand(100,200,FALSE);
 			else gibitem.avelocity = crandom() * '0 300 0';

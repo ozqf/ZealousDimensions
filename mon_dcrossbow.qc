@@ -321,6 +321,43 @@ void() dcrossbow_shot =
 	launch_projectile (org, dir, CT_PROJ_BOLT1, self.attack_speed);
 };
 
+//===========================================================================
+void() dcrossbow_triple_shot =
+{
+	local	vector org, dir, dir_left, dir_right;
+
+	if (!self.enemy) return;
+	if (self.health < 1) return;
+
+	// Flash effect to show where bolt is coming from	
+	self.effects = self.effects | EF_MUZZLEFLASH;
+	sound (self, CHAN_WEAPON, "weapons/crossbow_fire.wav", 1, ATTN_NORM);
+
+	// Skill level adjustment
+	self.attack_speed = SPEED_TRIPLE_CROSS + (skill*SPEED_BOLTSKILL);
+
+	makevectors (self.angles);
+	org = self.origin + attack_vector(self.attack_offset);
+
+	//It certainly was really cool to write the code for tracking and
+	//lots of fun to watch how the AI adapts to the player movement,
+	//but as a player it just feels cheap and unfair!
+	//- The tracking feature is now just a spawnflag option
+	if (self.spawnflags & MON_DCROSSTRACK) dir = normalize(self.attack_track - org);
+	else dir = normalize(self.enemy.origin - org);
+	
+	// 0.4 is a wide spread but balanced for groups.
+	local float spread_mul = 0.3
+	dir_left = normalize(dir + ((-v_right) * spread_mul));
+	dir_right = normalize(dir + (v_right * spread_mul));
+	
+	// Fire projectile at player	
+	launch_projectile (org, dir, CT_PROJ_BOLT1, self.attack_speed);
+	
+	launch_projectile (org, dir_left, CT_PROJ_BOLT1, self.attack_speed);
+	launch_projectile (org, dir_right, CT_PROJ_BOLT1, self.attack_speed);
+};
+
 //----------------------------------------------------------------------------
 // FIRE  - fires crossbow and reload
 // Trimmed down from 32 frames to 20 (now 2s reload time)

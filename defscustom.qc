@@ -656,7 +656,7 @@ float SPEED_ZOMBIESKILL = 25;		// 550=easy, 575=normal, 600=hard, 625=nm
 float SPEED_PLAYPLASMA = 900;		// Player speed for Plasma
 float SPEED_REFLECTION = 600;		// Reflection speed for Plasma/Lightning
 float SPEED_LASER = 600;			// Enforcer laser speed
-float SPEED_PLASMA = 600;			// Eliminator plasma speed
+float SPEED_PLASMA = 1000;			// Eliminator plasma speed zqf - boosted
 float SPEED_JIMPROJ = 575;			// Crazy flying jim robot laz0r/rockets!?
 float SPEED_JIMPROJSKILL = 75;		// 575=easy, 650=normal, 725=hard, nm=800
 float SPEED_SENTPROJ = 575;			// Crazy flying jim robot laz0r/rockets!?
@@ -803,6 +803,8 @@ float SPEED_DCROSS = 500;			// Base speed of projectile bolts
 float SPEED_BOLTSKILL = 200;		// 500=easy, 700=normal, 900=hard, 1100=nm
 float DAMAGE_BOLT0 = 5;				// Bolt damge against crossbow knights only
 float DAMAGE_BOLT1 = 15;			// High damage hot red bolts!
+
+float SPEED_TRIPLE_CROSS = 200;			// ZQF: Base speed of triple shot bolts
 
 float DAMAGE_TARBABY = 120;			// Explosive damage from tarbies
 float DAMAGE_BOIL = 75;				// Explosive damage from boil
@@ -963,7 +965,7 @@ float MONAI_IMPACTZAXIS = 128;		// Above/below limit on affect
 
 // Boss Nour
 float MONAI_MELEENOUR = 192;		// Always attack player
-float MONAI_CLOSENOUR = 400;		// Close distance spit/bomb
+float MONAI_CLOSENOUR = 2000;		// Close distance spit/bomb // zqf - origin is 400
 float MONAI_MAXNOUR = 325;			// Maximum tether range
 
 // Boss Eidolon

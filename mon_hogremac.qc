@@ -229,14 +229,16 @@ void()	hogre_leap15	=[	$leap15,	hogre_run1	] {};
  OgreFireGrenade (use version in mon_ogre.qc)
 ======================================================================*/
 void() hogremac_shoot1	=[	$shoot1,		hogremac_shoot2	] {ai_face();
-	MonsterGrenadeSound(); self.attack_speed = MonsterGrenadeSpeed();
+	MonsterGrenadeSound(); self.attack_speed = MonsterGrenadeSpeed(); // zqf: This is ignored. fire func overrides speed
 	self.attack_elev = SUB_Elevation(ELEV_DEFAULT, self.origin, self.enemy.origin, self.attack_speed); };
 void() hogremac_shoot2	=[	$shoot2,		hogremac_shoot3	] {ai_face();
 	self.attack_elev = SUB_Elevation(self.attack_elev, self.origin, self.enemy.origin, self.attack_speed); };
 void() hogremac_shoot3	=[	$shoot3,		hogremac_shoot4	] {ai_face();
 	self.attack_elev = SUB_Elevation(self.attack_elev, self.origin, self.enemy.origin, self.attack_speed); };
 void() hogremac_shoot4	=[	$shoot4,		hogremac_shoot5	] {ai_face();
-	MonsterFireGrenade(self.origin, self.enemy.origin);};
+	// zqf - replace grenade
+	// MonsterFireGrenade(self.origin, self.enemy.origin);};
+	dcrossbow_triple_shot();};
 void() hogremac_shoot5	=[	$shoot5,		hogremac_shoot6	] {ai_face();};
 void() hogremac_shoot6	=[	$shoot6,		hogremac_shoot7	] {ai_face();};
 void() hogremac_shoot7	=[	$shoot7,		hogremac_run1	] {ai_face();};

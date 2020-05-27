@@ -108,10 +108,14 @@ void(entity targ, entity inflictor, entity attacker, float damage, float checkar
 	local vector dir;
 	local entity oldself;
 	local float save, take, flinch;
-
+	
 	// Cannot hurt the world or enemy targets (fake flying markers)
 	if (targ.classtype == CT_WORLD) return;
 	if (targ.classtype == CT_ENEMYTARGET) return;
+	
+	
+	// zqf - specific addition to disable monsters hurting each other
+	if ((targ.team == attacker.team) && (targ.flags & FL_MONSTER) && (attacker.flags & FL_MONSTER)) return;
 
 	// Is the monster dying and going through death animation?
 	if (targ.flags & FL_MONSTER && targ.health < 1) {
