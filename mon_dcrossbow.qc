@@ -324,7 +324,7 @@ void() dcrossbow_shot =
 //===========================================================================
 void() dcrossbow_triple_shot =
 {
-	local	vector org, dir, dir_left, dir_right;
+	local	vector org, dir;
 
 	if (!self.enemy) return;
 	if (self.health < 1) return;
@@ -346,13 +346,16 @@ void() dcrossbow_triple_shot =
 	if (self.spawnflags & MON_DCROSSTRACK) dir = normalize(self.attack_track - org);
 	else dir = normalize(self.enemy.origin - org);
 	
-	// 0.4 is a wide spread but balanced for groups.
+	// Fire projectile at player	
+	launch_projectile (org, dir, CT_PROJ_BOLT1, self.attack_speed);
+	
+	// zqf - fire spread
+	local vector dir_left, dir_right;
+	// adjusts portion of normal applied to direction.
+	// decrease to tighten spread
 	local float spread_mul = 0.3
 	dir_left = normalize(dir + ((-v_right) * spread_mul));
 	dir_right = normalize(dir + (v_right * spread_mul));
-	
-	// Fire projectile at player	
-	launch_projectile (org, dir, CT_PROJ_BOLT1, self.attack_speed);
 	
 	launch_projectile (org, dir_left, CT_PROJ_BOLT1, self.attack_speed);
 	launch_projectile (org, dir_right, CT_PROJ_BOLT1, self.attack_speed);

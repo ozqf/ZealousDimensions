@@ -81,17 +81,17 @@ void()	garg_run1	=[	$fly1,	garg_run2	] {monster_idle_sound();
 		self.meleeattack = time + 4 + (random() + random() + random() * 4);
 		self.lefty = rint(1 - self.lefty);
 	}
-	ai_run(4);
+	ai_run(MON_GARGOYLE_BASE_SPEED);
 };
-void()	garg_run2	=[	$fly3,	garg_run3	] {ai_run(5);};
-void()	garg_run3	=[	$fly5,	garg_run4	] {gargoylewings(); ai_run(6);};
-void()	garg_run4	=[	$fly7,	garg_run5	] {ai_run(7);};
-void()	garg_run5	=[	$fly9,	garg_run6	] {ai_run(8);};
-void()	garg_run6	=[	$fly11,	garg_run7	] {ai_run(4);};
-void()	garg_run7	=[	$fly13,	garg_run8	] {ai_run(5);};
-void()	garg_run8	=[	$fly15,	garg_run9	] {ai_run(6);};
-void()	garg_run9	=[	$fly17,	garg_run10	] {ai_run(7);};
-void()	garg_run10	=[	$fly19,	garg_run1	] {ai_run(8);};
+void()	garg_run2	=[	$fly3,	garg_run3	] {ai_run(MON_GARGOYLE_BASE_SPEED + 1);};
+void()	garg_run3	=[	$fly5,	garg_run4	] {gargoylewings(); ai_run(MON_GARGOYLE_BASE_SPEED + 2);};
+void()	garg_run4	=[	$fly7,	garg_run5	] {ai_run(MON_GARGOYLE_BASE_SPEED + 3);};
+void()	garg_run5	=[	$fly9,	garg_run6	] {ai_run(MON_GARGOYLE_BASE_SPEED + 4);};
+void()	garg_run6	=[	$fly11,	garg_run7	] {ai_run(MON_GARGOYLE_BASE_SPEED + 5);};
+void()	garg_run7	=[	$fly13,	garg_run8	] {ai_run(MON_GARGOYLE_BASE_SPEED + 6);};
+void()	garg_run8	=[	$fly15,	garg_run9	] {ai_run(MON_GARGOYLE_BASE_SPEED + 7);};
+void()	garg_run9	=[	$fly17,	garg_run10	] {ai_run(MON_GARGOYLE_BASE_SPEED + 8);};
+void()	garg_run10	=[	$fly19,	garg_run1	] {ai_run(MON_GARGOYLE_BASE_SPEED + 9);};
 
 //============================================================================
 // Range attack
@@ -106,6 +106,17 @@ void() garg_fbthrow =
 	self.attack_speed = SPEED_GARGMISSILE + (skill * SPEED_GARGSKILL);
 	
 	Launch_Missile (org, dir, '0 0 0', CT_PROJ_GARG, self.attack_speed);
+
+	// // zqf - fire spread
+	// local vector dir_left, dir_right;
+	// // adjusts portion of normal applied to direction.
+	// // decrease to tighten spread
+	// local float spread_mul = 0.3;
+	// dir_left = normalize(dir + ((-v_right) * spread_mul));
+	// dir_right = normalize(dir + (v_right * spread_mul));
+	
+	// Launch_Missile (org, dir_left, '0 0 0', CT_PROJ_GARG, self.attack_speed);
+	// Launch_Missile (org, dir_right, '0 0 0', CT_PROJ_GARG, self.attack_speed);
 };
 
 //----------------------------------------------------------------------

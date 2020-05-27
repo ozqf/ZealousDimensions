@@ -1,4 +1,35 @@
-# ArcaneDimensions
+# Zealous Dimensions
+
+Personal tweaks to Arcane Dimensions Quake 1 mod.
+General aim is tweaking monsters to make their projectiles more varied and behaviour
+more aggressive.
+
+
+## Gameplay changes from standard AD
+General changes have been to make monsters more aggressive.
+
+* Monsters can no longer in-fight or hurt each other.
+* Rocketeer - More Quoth-like behaviour - rocket accelerates faster, seeker behaviour is a gradual turn again.
+* Plasma Soldier - fires endlessly.
+* Eliminator - projectiles are faster.
+* Mace Ogre - Now fires a triple spread of arrows instead of a grenade.
+* Doggie - health increased from 25 to 80 - used like Doom pinkies.
+* Voreling - health reduced to 1
+* Gaunt - High health, higher speed, spreadfire attack.
+* Gargoyle - increased speed.
+* Increased the energy in monster gibbing - found gibs in AD less dramatic that base Quake 1.
+
+Intended:
+* Nour (giant scrag) - Want to use this more as a regular large enemy.
+	Probably faster movement and favour nail attack more.
+* death sergeant - Not sure yet! Want to do something to make it more distinct from other death knights.
+
+
+==============================================================================
+Original Readme:
+==============================================================================
+
+ArcaneDimensions
 Quake 1 MOD code progs
 ==============================================================================
 (Title) Arcane Dimensions MOD for Quake 1

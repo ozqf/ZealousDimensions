@@ -511,6 +511,9 @@ float MON_GIBFOUNTAIN = -3;			// Gibs fly up and outwards (fountain)
 float MON_GIBEXPLOSION = -4;		// Gibs fly upwards with force
 float MON_NEVERGIB = -300;			// Monster can never be gibbed
 
+float MON_GAUNT_SPEED = 16;			// zqf - boosted
+float MON_GARGOYLE_BASE_SPEED = 8;	// zqf - boosted
+
 // Used in AI.QC routine for AI distance checks
 float MON_RANGE_MELEE = 120;		// Melee range
 float MON_RANGE_CLOSE = 192;		// Close melee range
@@ -684,7 +687,7 @@ float SPEED_NOURSPIKE = 600;		// Base speed of Nour attack A/B
 float SPEED_NOURSKILL = 200;		// 600=easy, 800=normal, 1000=hard, 1200=nm
 float SPEED_NOURBOMB = 600;			// Grenade bounce speed (no skill change)
 
-float SPEED_GARGMISSILE = 500;		// Gargoyle fireball attack
+float SPEED_GARGMISSILE = 250;		// Gargoyle fireball attack zqf - reduced
 float SPEED_GARGSKILL = 150;		// 500=easy, 650=normal, 800=hard, 950=nm
 
 float SPEED_SWIZMISSILE = 525;		// Skull wizard SKULL attack

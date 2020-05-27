@@ -97,27 +97,27 @@ void() gaunt_run1 = [ $hover1, gaunt_run2 ] {monster_idle_sound();
 		self.meleeattack = time + 4 + (random() + random() + random() * 4);
 		self.lefty = rint(1 - self.lefty);
 	}
-	ai_run(8);
+	ai_run(MON_GAUNT_SPEED);
 };
-void() gaunt_run2 = [ $hover2, gaunt_run3 ] {ai_run(8);};
-void() gaunt_run3 = [ $hover3, gaunt_run4 ] {ai_run(8);};
-void() gaunt_run4 = [ $hover4, gaunt_run5 ] {ai_run(8);};
-void() gaunt_run5 = [ $hover5, gaunt_run6 ] {gauntwings();ai_run(8);};
-void() gaunt_run6 = [ $hover6, gaunt_run7 ] {ai_run(8);};
-void() gaunt_run7 = [ $hover7, gaunt_run8 ] {ai_run(8);};
-void() gaunt_run8 = [ $hover8, gaunt_run9 ] {ai_run(8);};
-void() gaunt_run9 = [ $hover9, gaunt_run10 ] {ai_run(8);};
-void() gaunt_run10 = [ $hover10, gaunt_run11 ] {ai_run(8);};
-void() gaunt_run11 = [ $hover11, gaunt_run12 ] {ai_run(8);};
-void() gaunt_run12 = [ $hover12, gaunt_run13 ] {ai_run(8);};
-void() gaunt_run13 = [ $hover13, gaunt_run14 ] {ai_run(8);};
-void() gaunt_run14 = [ $hover14, gaunt_run15 ] {ai_run(8);};
-void() gaunt_run15 = [ $hover15, gaunt_run16 ] {gauntwings();ai_run(8);};
-void() gaunt_run16 = [ $hover16, gaunt_run17 ] {ai_run(8);};
-void() gaunt_run17 = [ $hover17, gaunt_run18 ] {ai_run(8);};
-void() gaunt_run18 = [ $hover18, gaunt_run19 ] {ai_run(8);};
-void() gaunt_run19 = [ $hover19, gaunt_run20 ] {ai_run(8);};
-void() gaunt_run20 = [ $hover20, gaunt_run1 ] {ai_run(8);};
+void() gaunt_run2 = [ $hover2, gaunt_run3 ] {ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run3 = [ $hover3, gaunt_run4 ] {ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run4 = [ $hover4, gaunt_run5 ] {ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run5 = [ $hover5, gaunt_run6 ] {gauntwings();ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run6 = [ $hover6, gaunt_run7 ] {ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run7 = [ $hover7, gaunt_run8 ] {ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run8 = [ $hover8, gaunt_run9 ] {ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run9 = [ $hover9, gaunt_run10 ] {ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run10 = [ $hover10, gaunt_run11 ] {ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run11 = [ $hover11, gaunt_run12 ] {ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run12 = [ $hover12, gaunt_run13 ] {ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run13 = [ $hover13, gaunt_run14 ] {ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run14 = [ $hover14, gaunt_run15 ] {ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run15 = [ $hover15, gaunt_run16 ] {gauntwings();ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run16 = [ $hover16, gaunt_run17 ] {ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run17 = [ $hover17, gaunt_run18 ] {ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run18 = [ $hover18, gaunt_run19 ] {ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run19 = [ $hover19, gaunt_run20 ] {ai_run(MON_GAUNT_SPEED);};
+void() gaunt_run20 = [ $hover20, gaunt_run1 ] {ai_run(MON_GAUNT_SPEED);};
 
 //============================================================================
 // RANGE - Plasma from arc infront
@@ -135,6 +135,17 @@ void() gaunt_plasma =
 	self.attack_speed = SPEED_GAUNTBOLT + (skill * SPEED_GAUNTSKILL);
 
 	launch_plasma(org, dir, CT_MONGAUNT, self.attack_speed);
+
+	// zqf - fire spread
+	local vector dir_left, dir_right;
+	// adjusts portion of normal applied to direction.
+	// decrease to tighten spread
+	local float spread_mul = 0.6;
+	dir_left = normalize(dir + ((-v_right) * spread_mul));
+	dir_right = normalize(dir + (v_right * spread_mul));
+
+	launch_plasma(org, dir_left, CT_MONGAUNT, self.attack_speed);
+	launch_plasma(org, dir_right, CT_MONGAUNT, self.attack_speed);
 };
 
 //----------------------------------------------------------------------
@@ -410,7 +421,7 @@ void() monster_gaunt =
 	self.solid = SOLID_NOT;				// No interaction with world
 	self.movetype = MOVETYPE_NONE;		// Static item, no movement
 	if (self.bboxtype < 1) self.bboxtype = BBOX_TALL;
-	if (self.health < 1) self.health = 120;
+	if (self.health < 1) self.health = 250; // zqf - boosted
 	self.gibhealth = -70;				// Need a powerful weapon to GIB
 	self.gibbed = FALSE;				// no falling apart
 	self.pain_flinch = 70;				// High pain threshold
